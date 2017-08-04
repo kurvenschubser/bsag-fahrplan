@@ -30,6 +30,8 @@ class HAFASProvider:
         url = urllib.parse.urlparse(self.__base_uri)
         self.__http_headers['Host'] = url.netloc
 
+        print(url.netloc)
+
         # disguise as a browser
         self.__http_headers['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64; rv:27.0) Gecko/20100101 Firefox/27.0'
 
@@ -137,7 +139,7 @@ class HAFASProvider:
         req_uri = "{base_uri}{binary_path}{lang}{type}{suggestions}{query_params}".format(base_uri=self.__base_uri, \
             lang=self.__lang, type=self.__type, suggestions=self.__with_suggestions, \
             query_params=qp, binary_path=self.__stboard_path)
-        #print(req_uri)
+        print(req_uri)
         req = urllib.request.Request(req_uri)
         self.__add_http_headers(req)
         res = urllib.request.urlopen(req)
@@ -322,4 +324,3 @@ class HAFASException(Exception):
 
 class StationNotFoundException(HAFASException):
     pass
-
